@@ -14,15 +14,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import com.example.nofap.ui.theme.NoFapTheme
+import com.example.nofap.userRepository.MyApplication
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         val fapmodel: FapModel by viewModels()
+         //val fapmodel: FapModel by viewModels()
+         lateinit var viewModel: FapModel
+        val dataStore = (application as MyApplication).dataStore
+        viewModel = FapModel(dataStore)
         enableEdgeToEdge()
         setContent {
             NoFapTheme {
-                HomeScreen(fapmodel)
+                HomeScreen(viewModel)
 
             }
         }

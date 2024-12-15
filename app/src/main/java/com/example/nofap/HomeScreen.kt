@@ -51,7 +51,7 @@ fun HomeScreen(noFapModel: FapModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Streak(streakDays = uiState.toString())
+            Streak(streakDays = uiState.toString(),noFapModel)
 
             if (selectedDate != null) {
                 val formattedDate = java.text.SimpleDateFormat("MMM dd, yyyy", java.util.Locale.getDefault())
@@ -111,10 +111,10 @@ fun DatePickerModalInput(
 }
 
 @Composable
-fun Streak(streakDays: String) {
+fun Streak(streakDays: String , fapModel: FapModel) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
-            painter = painterResource(R.drawable.sigma),
+            painter = painterResource(fapModel.checkStreak(streakDays.toLong())),
             contentDescription = "Streak Image"
         )
         Text("You haven't fapped for $streakDays days!!!")
